@@ -40,14 +40,20 @@ class Visualizer {
 
     //???WRITE THIS METHOD FIRST!!!
     //THESE ARE WRONG: They just illustrate how they could look
+    float startx = x;
+    float starty = y+100; //y=0 line
+    float width = 400/values.length;//how wide the rectangle should be: 400/values.length
     for (int i = 0; i < values.length; i++){
-      if (values[i] < 0){
-        fill(255, 0, 0);
+      if (values[i] >= 0){
+        fill(0, 255, 0);
+        rect(startx, starty-values[i], width, values[i]);
       }
       else{
-        fill(0, 255, 255);
+        fill(255, 0, 0);
+        rect(startx, starty, width, values[i]*-1);
       }
-      rect(x+ (i*400/values.length), y+100, 400/values.length, values[i]);
+      startx+=width;
+      //rect(x+ (i*width), y+100, width, values[i]);
     }
 
 
@@ -60,10 +66,9 @@ class Visualizer {
     for (int i = 0; i < values.length; i++) {
       values[i] += speeds[i]; //the speed updates the values. Do not touch this.
       //??? keep them values between max/min value so they stay in the box.
-
-      //??? reverse the speeds so the bar oscillates up/down when it reaches max/min
-
       
+      //??? reverse the speeds so the bar oscillates up/down when it reaches max/min
+       
     }
   }
 }
