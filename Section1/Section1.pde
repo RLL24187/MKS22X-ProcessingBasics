@@ -10,9 +10,12 @@ class Visualizer {
   float x, y;
   float [] values;
   float [] speeds;
+  int width, height;
   Visualizer(float x, float y) {
     this.x = x;
     this.y = y;
+    width = 400;
+    height = 200;
     values = new float[10];
     speeds = new float[10];
     for (int i = 0; i < values.length; i++) {
@@ -20,6 +23,23 @@ class Visualizer {
       speeds[i] = random(2);
     }
   }
+  /**Part c) variable num visualizer constructor
+  *@param float x, y
+  *@param int num number of values
+  */
+  Visualizer(float X, float Y, int num){
+    x = X;
+    y = Y;
+    width = 400;
+    height = 200;
+    values = new float[num];
+    speeds = new float[num];
+    for(int i = 0; i < values.length; i++){
+      values[i] = random(-99, 99);
+      speeds[i] = random(2);
+    }
+  }
+    
 
   void display() {
     //draw the bars equally spaced inside this box. 
@@ -68,14 +88,22 @@ class Visualizer {
       //??? keep them values between max/min value so they stay in the box.
       
       //??? reverse the speeds so the bar oscillates up/down when it reaches max/min
-       
+      if (values[i] > 100) {
+        values[i] = 100;
+        speeds[i] *= -1;
+      }
+      if (values[i] < -100) {
+        values[i] = -100;
+        speeds[i] *= -1;
+      }
     }
   }
 }
 
 void setup() {
   size(600, 500);
-  v = new Visualizer(20, 20);
+  //v = new Visualizer(20, 20);
+  v1 = new Visualizer(20, 20, 15);
 }
 void draw() {
   background(255);
