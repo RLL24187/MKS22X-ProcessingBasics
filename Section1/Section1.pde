@@ -10,12 +10,13 @@ class Visualizer {
   float x, y;
   float [] values;
   float [] speeds;
-  float width, height;
+  int width, height;
   Visualizer(float x, float y) {
     this.x = x;
     this.y = y;
     width = 400;
     height = 200;
+    //max and min value don't have to be adjusted
     values = new float[10];
     speeds = new float[10];
     for (int i = 0; i < values.length; i++) {
@@ -30,8 +31,10 @@ class Visualizer {
   Visualizer(float X, float Y, int num){
     x = X;
     y = Y;
-    width = 400.;
-    height = 200.;
+    width = 400;
+    height = 200;
+    MAX_VALUE=height/2;
+    MIN_VALUE=-MAX_VALUE;
     values = new float[num];
     speeds = new float[num];
     for(int i = 0; i < values.length; i++){
@@ -78,14 +81,16 @@ class Visualizer {
     //THESE ARE WRONG: They just illustrate how they could look
     float startx = x;
     float starty = y+(height/2); //y=0 line
-    float wide = width/values.length;//how wide the rectangle should be: width/values.length
+    float wide = 1.0*width/values.length;//how wide the rectangle should be: width/values.length
     for (int i = 0; i < values.length; i++){
-      if (values[i] >= 0){
-        fill(0, 255, 0);
+      if (values[i] >= 0){ //pos
+        float rChange = (MAX_VALUE - values[i])*(255*1.25/MAX_VALUE);
+        fill(rChange, 255, 0);
         rect(startx, starty-values[i], wide, values[i]);
       }
-      else{
-        fill(255, 0, 0);
+      else{//neg
+        float gChange = (MAX_VALUE + values[i]) * (255*1.25/MAX_VALUE); //adjust green
+        fill(255, gChange, 0);
         rect(startx, starty, wide, values[i]*-1);
       }
       startx+=wide;
@@ -120,7 +125,7 @@ void setup() {
   size(600, 500);
   //v = new Visualizer(20, 20);
   //v = new Visualizer(20, 20, 15);
-  v = new Visualizer (30, 50, 25, 700, 200);
+  v = new Visualizer (30, 50, 25, 500, 400);
 }
 void draw() {
   background(255);
