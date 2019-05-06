@@ -39,7 +39,23 @@ class Visualizer {
       speeds[i] = random(2);
     }
   }
-    
+  /**Part c) constructor allowing for variable width/height on bounding box
+  *@param float x, y
+  *@param int num number of values
+  *@param width, height  
+  */
+  Visualizer(float X, float Y, int num, int Width, int Height){
+    x = X;
+    y = Y;
+    width = Width;
+    height = Height;
+    values = new float[num];
+    speeds = new float[num];
+    for (int i = 0; i < values.length; i++){
+      values[i] = random(-99, 99);
+      speeds[i] = random(2);
+    }
+  }
 
   void display() {
     //draw the bars equally spaced inside this box. 
@@ -62,7 +78,7 @@ class Visualizer {
     //THESE ARE WRONG: They just illustrate how they could look
     float startx = x;
     float starty = y+100; //y=0 line
-    float width = 400/values.length;//how wide the rectangle should be: 400/values.length
+    float width = 400./values.length;//how wide the rectangle should be: 400/values.length
     for (int i = 0; i < values.length; i++){
       if (values[i] >= 0){
         fill(0, 255, 0);
@@ -103,7 +119,8 @@ class Visualizer {
 void setup() {
   size(600, 500);
   //v = new Visualizer(20, 20);
-  v1 = new Visualizer(20, 20, 15);
+  //v = new Visualizer(20, 20, 15);
+  v = new Visualizer (30, 50, 25, 600, 250);
 }
 void draw() {
   background(255);
