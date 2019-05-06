@@ -52,6 +52,8 @@ class Visualizer {
     y = Y;
     width = Width;
     height = Height;
+    MAX_VALUE=height/2;
+    MIN_VALUE=-MAX_VALUE;    
     values = new float[num];
     speeds = new float[num];
     for (int i = 0; i < values.length; i++){
@@ -109,12 +111,12 @@ class Visualizer {
       //??? keep them values between max/min value so they stay in the box.
       
       //??? reverse the speeds so the bar oscillates up/down when it reaches max/min
-      if (values[i] > height/2) {
-        values[i] = height/2;
+      if (values[i] > MAX_VALUE) {
+        values[i] = MAX_VALUE;
         speeds[i] *= -1;
       }
-      if (values[i] < -height/2) {
-        values[i] = -height/2;
+      if (values[i] < MIN_VALUE) {
+        values[i] = MIN_VALUE;
         speeds[i] *= -1;
       }
     }
